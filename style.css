@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  z-index: 0;
+  background-color: black;
+}
+
+#game-canvas {
+  border: 5px solid firebrick;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: aliceblue;
+}
+
+#player {
+  display: none;
+}
