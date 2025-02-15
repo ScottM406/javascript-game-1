@@ -3,7 +3,7 @@
 ## Javascript ractice for:
 
 # Classes
-# <canvas>
+# canvas
 
 Javascript practice based on Franks laboratory Youtube tutorial.
 
