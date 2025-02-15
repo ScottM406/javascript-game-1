@@ -13,7 +13,7 @@ export class Player {
     this.frameX = 0;
     this.frameY = 0;
     this.maxFrame;
-    this.fps = 20;
+    this.fps = 10;
     this.frameIntreval = 1000/this.fps;
     this.frameTimer = 0;
     this.speed = 0;
@@ -51,8 +51,9 @@ export class Player {
   onGround(){
     return this.y >= this.game.height - this.height - this.game.groundMargin;
   }
-  setState(state){
+  setState(state, speed){
     this.currentState = this.states[state]
+    this.game.speed = this.game.maxSpeed * speed;
     this.currentState.enter();
   }
 }
