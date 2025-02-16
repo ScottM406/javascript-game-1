@@ -23,6 +23,7 @@ window.addEventListener('load', () => {
       this.enemies = [];
       this.enemyTimer = 0;
       this.enemyInterval = 1500;
+      this.score = 0
       this.debug = false;
     }
     update(deltaTime){
