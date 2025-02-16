@@ -24,7 +24,7 @@ export class Player {
   }
   update(input, deltaTime){
     this.currentState.handleInput(input);
-    //horizontal movementD
+    //horizontal movement
     this.x += this.speed;
     if (input.includes('d')) this.speed = this.maxSpeed
     else if (input.includes('a')) this.speed = -this.maxSpeed;
@@ -46,6 +46,11 @@ export class Player {
 
   }
   draw(context){
+    if (this.game.debug){ 
+      context.strokeStyle = 'red';
+      context.strokeRect(this.x, this.y, this.width, this.height);
+      context.strokeStyle = 'black';
+    }
     context.drawImage(this.image, this.frameX * this.width , this.frameY * this.height, this.width, this.height, this.x, this.y, this.width, this.height)
   }
   onGround(){
