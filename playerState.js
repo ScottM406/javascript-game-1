@@ -71,6 +71,8 @@ export class Jumping extends State {
       this.game.player.setState(states.FALLING, 0.5);
     } else if (input.includes('j')){
       this.game.player.setState(states.ROLLING, 1)
+    } else if (input.includes('s')){
+      this.game.player.setState(states.DIVING, 0)
     }
   }
 }
@@ -89,6 +91,8 @@ export class Falling extends State {
       this.game.player.setState(states.RUNNING, 0.5);
     } else if (input.includes('j')){
       this.game.player.setState(states.ROLLING, 1)
+    } else if (input.includes('s')){
+      this.game.player.setState(states.DIVING, 0)
     }
   }
 }
@@ -110,6 +114,27 @@ export class Rolling extends State {
       this.game.player.setState(states.FALLING, 0.5);
     } else if (input.includes('j') && input.includes('w') && this.game.player.onGround()){
       this.game.player.vy -=27;
+    } else if (input.includes('s')){
+      this.game.player.setState(states.DIVING, 0)
+    }
+  }
+}
+
+export class Diving extends State {
+  constructor(game){
+    super('DIVING', game);
+  }
+  enter(){
+    this.game.player.framex = 0;
+    this.game.player.maxFrame = 6;
+    this.game.player.frameY = 6;
+  }
+  handleInput(input){
+    this.game.particles.unshift(new Fire(this.game, this.game.player.x + 60, this.game.player.y + 50));
+    if (this.game.player.onGround()){
+      this.game.player.setState(states.RUNNING, 0.5);
+    } else if (input.includes('j') && this.game.player.onGround()){
+      this.game.player.setState(states.ROLLING, 1);
     }
   }
 }
