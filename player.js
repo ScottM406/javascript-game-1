@@ -1,4 +1,4 @@
-import { Jumping, Sitting, Running, Falling, Rolling, Diving } from "./playerState.js";
+import { Jumping, Sitting, Running, Falling, Rolling, Diving, Hit } from "./playerState.js";
 
 export class Player {
   constructor(game){
@@ -18,7 +18,7 @@ export class Player {
     this.frameTimer = 0;
     this.speed = 0;
     this.maxSpeed = 5;
-    this.states = [new Sitting(this.game), new Running(this.game), new Jumping(this.game), new Falling(this.game), new Rolling(this.game), new Diving(this.game)];
+    this.states = [new Sitting(this.game), new Running(this.game), new Jumping(this.game), new Falling(this.game), new Rolling(this.game), new Diving(this.game), new Hit(this.game)];
   }
   update(input, deltaTime){
     this.checkCollision();
@@ -72,10 +72,12 @@ export class Player {
         enemy.y + enemy.height > this.y
       ){
         enemy.markedForDeletion = true;
+        if (this.currentState === this.states[4] || this.currentState === this.states[5]){
         this.game.score++;
-      } else {
-
+        } else {
+          this.setState(6, 0)
+        }
       }
     });
   }
-}
+};
