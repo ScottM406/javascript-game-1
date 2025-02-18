@@ -11,9 +11,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: aliceblue;
 }
 
-#player, #layer1, #layer2, #layer3, #layer4, #layer5, #enemy-fly, #enemy-ground, #enemy-climb {
+#player, #layer1, #layer2, #layer3, #layer4, #layer5, #enemy-fly, #enemy-ground, #enemy-climb, #fire {
   display: none;
 }
