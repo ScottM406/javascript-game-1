@@ -29,6 +29,7 @@ window.addEventListener('load', () => {
       this.enemyTimer = 0;
       this.enemyInterval = 1500;
       this.score = 0;
+      this.playerLives = 5;
       this.fontColor = 'firebrick'
       this.debug = false;
       this.player.currentState = this.player.states[0];
@@ -66,6 +67,10 @@ window.addEventListener('load', () => {
         collision.update(deltaTime)
         if (collision.markedForDeletion) this.collisions.splice(index, 1)
       })
+      //handle out of lives
+      if (this.playerLives === 0){
+        this.gameOver = true;
+      }
     }
     draw(context){
       this.background.draw(context);

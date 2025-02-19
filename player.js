@@ -46,7 +46,6 @@ export class Player {
     } else {
       this.frameTimer += deltaTime;
     }
-
   }
   draw(context){
     if (this.game.debug){ 
@@ -78,6 +77,7 @@ export class Player {
         this.game.score++;
         } else {
           this.setState(6, 0)
+          this.game.playerLives--;
         }
       }
     });
