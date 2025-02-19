@@ -1,6 +1,6 @@
 import { Jumping, Sitting, Running, Falling, Rolling, Diving, Hit } from "./playerState.js";
 import { CollisionAnimation } from "./collisionAnimation.js";
-
+import { FloatingMessage } from "./floatingMessages.js";
 export class Player {
   constructor(game){
     this.game = game;
@@ -26,6 +26,7 @@ export class Player {
     this.currentState.handleInput(input);
     //horizontal movement
     this.x += this.speed;
+    if (this.x >= 1000) this.x = 1000; //limit horizontal position to increse difficulty
     if (input.includes('d') && this.currentState !== this.states[6]) this.speed = this.maxSpeed
     else if (input.includes('a') && this.currentState !== this.states[6]) this.speed = -this.maxSpeed;
     else this.speed = 0;
@@ -74,9 +75,12 @@ export class Player {
         enemy.markedForDeletion = true;
         this.game.collisions.push(new CollisionAnimation(this.game, enemy.x + enemy.width * 0.5, enemy.y + enemy.height * 0.5));
         if (this.currentState === this.states[4] || this.currentState === this.states[5]){
-        this.game.score++;
+          this.game.floatingMessages.push(new FloatingMessage('POW!', enemy.x, enemy.y, enemy.x - 200, enemy.y + 20));
+          this.game.floatingMessages.push(new FloatingMessage('+1', enemy.x, enemy.y, 120, 30));
+          this.game.score++;
         } else {
           this.setState(6, 0)
+          this.game.floatingMessages.push(new FloatingMessage('Oofta!', enemy.x, enemy.y, enemy.x + 10, enemy.y + 10));
           this.game.playerLives--;
         }
       }
