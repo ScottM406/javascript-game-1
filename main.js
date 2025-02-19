@@ -33,8 +33,13 @@ window.addEventListener('load', () => {
       this.debug = false;
       this.player.currentState = this.player.states[0];
       this.player.currentState.enter();
+      this.time = 0;
+      this.maxTime = 60000;
+      this.gameOver = false;
     }
     update(deltaTime){
+      this.time += deltaTime;
+      if (this.time > this.maxTime) this.gameOver = true;
       this.background.update();
       this.player.update(this.input.keys, deltaTime);
       //spawn/despwan enemies
@@ -54,14 +59,13 @@ window.addEventListener('load', () => {
         if (particle.markedForDeletion) this.particles.splice(index, 1);
       });
       if (this.particles.length > this.maxParticles) {
-        this.particles = this.particles.slice(0, this.maxParticles);
+        this.particles.length = this.maxParticles;
       }
       //handle collision animation
       this.collisions.forEach((collision, index) => {
         collision.update(deltaTime)
         if (collision.markedForDeletion) this.collisions.splice(index, 1)
       })
-      console.log(this.collisions)
     }
     draw(context){
       this.background.draw(context);
@@ -97,7 +101,7 @@ window.addEventListener('load', () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     game.update(deltaTime);
     game.draw(ctx)
-    requestAnimationFrame(animate);
+    if (!game.gameOver) requestAnimationFrame(animate);
   }
   animate(0);
 });

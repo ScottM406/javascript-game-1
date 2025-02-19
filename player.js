@@ -18,7 +18,7 @@ export class Player {
     this.frameIntreval = 1000/this.fps;
     this.frameTimer = 0;
     this.speed = 0;
-    this.maxSpeed = 5;
+    this.maxSpeed = 3;
     this.states = [new Sitting(this.game), new Running(this.game), new Jumping(this.game), new Falling(this.game), new Rolling(this.game), new Diving(this.game), new Hit(this.game)];
   }
   update(input, deltaTime){
@@ -26,8 +26,8 @@ export class Player {
     this.currentState.handleInput(input);
     //horizontal movement
     this.x += this.speed;
-    if (input.includes('d')) this.speed = this.maxSpeed
-    else if (input.includes('a')) this.speed = -this.maxSpeed;
+    if (input.includes('d') && this.currentState !== this.states[6]) this.speed = this.maxSpeed
+    else if (input.includes('a') && this.currentState !== this.states[6]) this.speed = -this.maxSpeed;
     else this.speed = 0;
     //horizonal boundries
     if (this.x < 0) this.x = 0;
