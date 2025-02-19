@@ -11,8 +11,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-family: "Henny Penny", serif;
 }
 
-#player, #layer1, #layer2, #layer3, #layer4, #layer5, #enemy-fly, #enemy-ground, #enemy-climb, #fire, #collisionAnimation {
+#player, #layer1, #layer2, #layer3, #layer4, #layer5, #enemy-fly, #enemy-ground, #enemy-climb, #fire, #collisionAnimation, #heart {
   display: none;
 }

@@ -1,10 +1,10 @@
 ### Super Dog game
 
-## Javascript ractice for:
+## Javascript practice for:
 
 # Classes
 # canvas
 
-Javascript practice based on Franks laboratory Youtube tutorial.
+Javascript practice based on Franks laboratory Youtube tutorials.
 
 https://www.youtube.com/@Frankslaboratory

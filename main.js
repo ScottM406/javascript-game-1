@@ -25,10 +25,12 @@ window.addEventListener('load', () => {
       this.enemies = [];
       this.particles = [];
       this.collisions = [];
+      this.floatingMessages = [];
       this.maxParticles = 200;
       this.enemyTimer = 0;
       this.enemyInterval = 1500;
       this.score = 0;
+      this.playerLives = 5;
       this.fontColor = 'firebrick'
       this.debug = false;
       this.player.currentState = this.player.states[0];
@@ -66,10 +68,18 @@ window.addEventListener('load', () => {
         collision.update(deltaTime)
         if (collision.markedForDeletion) this.collisions.splice(index, 1)
       })
+      // handle floating messages
+      this.floatingMessages.forEach((message) => {
+        message.update();
+      })
+      this.floatingMessages = this.floatingMessages.filter((message) => !message.markedForDeletion)
+      //handle out of lives
+      if (this.playerLives === 0){
+        this.gameOver = true;
+      }
     }
     draw(context){
       this.background.draw(context);
-      this.ui.draw(context);
       this.player.draw(context);
       this.enemies.forEach(enemy => {
         enemy.draw(context);
@@ -80,6 +90,10 @@ window.addEventListener('load', () => {
       this.collisions.forEach((collision) => {
         collision.draw(context)
       })
+      this.floatingMessages.forEach((message) => {
+        message.draw(context);
+      })
+      this.ui.draw(context);
     }
     addEnemy(){
       if (this.speed > 0 && Math.random() > 0.61){
